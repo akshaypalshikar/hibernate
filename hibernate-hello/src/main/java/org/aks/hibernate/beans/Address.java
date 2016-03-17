@@ -228,5 +228,14 @@ public class Address implements Serializable {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Address [id=" + id + ", houseNumber=" + houseNumber + ", street=" + street + ", city=" + city
+				+ ", state=" + state + ", zipCode=" + zipCode + ", student=" + student.getName() + "]";
+	}
+
 	
 }

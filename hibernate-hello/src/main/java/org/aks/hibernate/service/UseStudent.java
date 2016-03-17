@@ -4,12 +4,13 @@
 package org.aks.hibernate.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.aks.hibernate.beans.Address;
 import org.aks.hibernate.beans.Student;
-import org.aks.hibernate.util.HibernateSessionFactory;
-import org.hibernate.classic.Session;
+import org.aks.hibernate.dao.StudentDAO;
+import org.aks.hibernate.dao.StudentDAOImpl;
 
 /**
  * @author akshay
@@ -22,10 +23,7 @@ public class UseStudent {
 	 */
 	public static void main(String[] args) {
 
-		System.out.println("Hibernate one to one (XML mapping)");
-		Session session = HibernateSessionFactory.getSessionFactory().openSession();
-
-		session.beginTransaction();
+		StudentDAO studentDAO = new StudentDAOImpl();
 
 		Student student = new Student();
 		Address address = new Address();
@@ -39,17 +37,28 @@ public class UseStudent {
 		address.setZipCode("00110");
 		
 				
-		student.setId(1);
-		student.setName("Akshay");
+		student.setName("Poorva");
 		student.setAddresses(addresses);
 		
 		address.setStudent(student);
+		studentDAO.saveOrUpdate(student);
+		
+		
+		Student studentFromDB = studentDAO.get(1);
+		System.out.println("studentFromDB is : " + studentFromDB);
+		
+		Student secondStudentToSave = new Student();
+		secondStudentToSave.setName("Akshay");
+		address.setStudent(secondStudentToSave);
+		
+		secondStudentToSave.setAddresses(addresses);
+		
+		studentDAO.saveOrUpdate(secondStudentToSave);
+		
+		Collection<Student> students = studentDAO.getAllStudents();
+		System.out.println("All students are : " + students);
+		
 			
-		session.saveOrUpdate(student);
-		session.getTransaction().commit();
-
-		System.out.println("Done");
-
 	}
 
 }

@@ -1,0 +1,19 @@
+/**
+ * 
+ */
+package org.aks.hibernate.dao;
+
+import java.util.List;
+
+import org.aks.hibernate.beans.Student;
+
+/**
+ * @author akshay
+ *
+ */
+public interface StudentDAO {
+	
+	public void saveOrUpdate(Student student);
+	public Student get(int id);
+	public List<Student> getAllStudents();
+}
