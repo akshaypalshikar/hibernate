@@ -11,6 +11,7 @@
     <property name="hibernate.connection.password">asdfgh</property>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="show_sql">false</property>
-    <mapping class="org.aks.hibernate.beans.Student" />
+	<mapping class="org.aks.hibernate.beans.Student" />
+	<mapping class="org.aks.hibernate.beans.Address" />    
 </session-factory>
 </hibernate-configuration>
