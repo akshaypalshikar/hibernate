@@ -13,6 +13,7 @@ import org.aks.hibernate.beans.Student;
  */
 public interface StudentDAO {
 	
+	public int save(Student student);
 	public void saveOrUpdate(Student student);
 	public Student get(int id);
 	public List<Student> getAllStudents();

@@ -9,6 +9,7 @@ import org.aks.hibernate.beans.Student;
 import org.aks.hibernate.util.HibernateSessionFactory;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
 /**
@@ -27,12 +28,24 @@ public class StudentDAOImpl implements StudentDAO {
 		System.out.println("In \"void org.aks.hibernate.dao.StudentDAOImpl.saveOrUpdate(Student student)\" method");
 		Session session = sessionFactory.openSession();
 
-		session.beginTransaction();
+		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(student);
-		session.getTransaction().commit();
+		transaction.commit();
 		session.close();
 
 		System.out.println("Done");
+	}
+	
+	public int save(Student student) {
+		System.out.println("In \"void org.aks.hibernate.dao.StudentDAOImpl.save(Student student)\" method");
+		Session session = sessionFactory.openSession();
+
+		Transaction transaction = session.beginTransaction();
+		int result = (Integer)session.save(student);
+		transaction.commit();
+		session.close();
+
+		return result;
 	}
 
 	/* (non-Javadoc)

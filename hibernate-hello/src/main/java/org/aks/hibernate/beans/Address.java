@@ -4,6 +4,7 @@
 package org.aks.hibernate.beans;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,11 +13,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 /**
  * @author akshay
@@ -51,10 +51,11 @@ public class Address implements Serializable {
 	@Column(name="zip_code")
 	private String zipCode;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@Cascade(value=CascadeType.SAVE_UPDATE)
-	@JoinColumn(name="student_id")
-	Student student;
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="student_address",joinColumns={@JoinColumn(name="address_id",referencedColumnName="id")},
+		inverseJoinColumns={@JoinColumn(name="student_id",referencedColumnName="id")}
+	)
+	Collection<Student> students;
 	
 
 	/**
@@ -141,20 +142,23 @@ public class Address implements Serializable {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-	
+
+
 	/**
-	 * @return the student
+	 * @return the students
 	 */
-	public Student getStudent() {
-		return student;
+	public Collection<Student> getStudents() {
+		return students;
 	}
 
 	/**
-	 * @param student the student to set
+	 * @param students the students to set
 	 */
-	public void setStudent(Student student) {
-		this.student = student;
+	public void setStudents(Collection<Student> students) {
+		this.students = students;
 	}
+
+	
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -187,42 +191,42 @@ public class Address implements Serializable {
 			return false;
 		}
 		Address other = (Address) obj;
-		if (this.getCity() == null) {
-			if (other.getCity() != null) {
+		if (city == null) {
+			if (other.city != null) {
 				return false;
 			}
-		} else if (!this.getCity().equals(other.getCity())) {
+		} else if (!city.equals(other.city)) {
 			return false;
 		}
-		if (this.getHouseNumber() == null) {
-			if (other.getHouseNumber() != null) {
+		if (houseNumber == null) {
+			if (other.houseNumber != null) {
 				return false;
 			}
-		} else if (!this.getHouseNumber().equals(other.getHouseNumber())) {
+		} else if (!houseNumber.equals(other.houseNumber)) {
 			return false;
 		}
-		if (this.getId()!= other.getId()) {
+		if (id != other.id) {
 			return false;
 		}
-		if (this.getState()== null) {
-			if (other.getState()!= null) {
+		if (state == null) {
+			if (other.state != null) {
 				return false;
 			}
-		} else if (!this.getState().equals(other.getState())) {
+		} else if (!state.equals(other.state)) {
 			return false;
 		}
-		if (this.getStreet()== null) {
-			if (other.getStreet()!= null) {
+		if (street == null) {
+			if (other.street != null) {
 				return false;
 			}
-		} else if (!this.getStreet().equals(other.getStreet())) {
+		} else if (!street.equals(other.street)) {
 			return false;
 		}
-		if (this.getZipCode()== null) {
-			if (other.getZipCode ()!= null) {
+		if (zipCode == null) {
+			if (other.zipCode != null) {
 				return false;
 			}
-		} else if (!this.getZipCode().equals(other.getZipCode())) {
+		} else if (!zipCode.equals(other.zipCode)) {
 			return false;
 		}
 		return true;
@@ -234,7 +238,7 @@ public class Address implements Serializable {
 	@Override
 	public String toString() {
 		return "Address [id=" + id + ", houseNumber=" + houseNumber + ", street=" + street + ", city=" + city
-				+ ", state=" + state + ", zipCode=" + zipCode + ", student=" + student.getName() + "]";
+				+ ", state=" + state + ", zipCode=" + zipCode + ", students=" + students.size() + "]";
 	}
 
 	

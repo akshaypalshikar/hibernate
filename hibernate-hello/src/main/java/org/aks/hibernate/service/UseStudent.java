@@ -4,7 +4,6 @@
 package org.aks.hibernate.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.aks.hibernate.beans.Address;
@@ -28,6 +27,7 @@ public class UseStudent {
 		Student student = new Student();
 		Address address = new Address();
 		List<Address> addresses = new ArrayList<Address>();
+		
 		addresses.add(address);
 		
 		address.setHouseNumber("123");
@@ -39,26 +39,26 @@ public class UseStudent {
 				
 		student.setName("Poorva");
 		student.setAddresses(addresses);
-		
-		address.setStudent(student);
-		studentDAO.saveOrUpdate(student);
+		studentDAO.save(student);
 		
 		
-		Student studentFromDB = studentDAO.get(1);
+/*		Student studentFromDB = studentDAO.get(1);
 		System.out.println("studentFromDB is : " + studentFromDB);
 		
 		Student secondStudentToSave = new Student();
 		secondStudentToSave.setName("Akshay");
-		address.setStudent(secondStudentToSave);
+		students.clear();
+		students.add(secondStudentToSave);
+		address.setStudents(students);
 		
 		secondStudentToSave.setAddresses(addresses);
 		
-		studentDAO.saveOrUpdate(secondStudentToSave);
+		studentDAO.save(secondStudentToSave);
 		
-		Collection<Student> students = studentDAO.getAllStudents();
-		System.out.println("All students are : " + students);
+		Collection<Student> studentsFromDB = studentDAO.getAllStudents();
+		System.out.println("All students are : " + studentsFromDB);
 		
-			
+*/			
 	}
 
 }

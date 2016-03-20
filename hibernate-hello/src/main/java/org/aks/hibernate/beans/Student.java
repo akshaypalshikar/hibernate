@@ -12,7 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
@@ -39,8 +39,8 @@ public class Student implements Serializable{
 	@Column(name="NAME")
 	private String name;
 
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="student")
-	@Cascade(value=CascadeType.SAVE_UPDATE)
+	@ManyToMany(fetch=FetchType.LAZY,mappedBy="students")
+	@Cascade(value=CascadeType.ALL)
 	private Collection<Address> addresses;
 	
 	public Student() {
@@ -82,6 +82,8 @@ public class Student implements Serializable{
 		this.addresses = addresses;
 	}
 
+
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -108,15 +110,15 @@ public class Student implements Serializable{
 		if (!(obj instanceof Student)) {
 			return false;
 		}
-		Student that = (Student) obj;
-		if (this.getId()!= that.getId()) {
+		Student other = (Student) obj;
+		if (id != other.id) {
 			return false;
 		}
-		if (this.getName()== null) {
-			if (that.getName() != null) {
+		if (name == null) {
+			if (other.name != null) {
 				return false;
 			}
-		} else if (!this.getName().equals(that.getName())) {
+		} else if (!name.equals(other.name)) {
 			return false;
 		}
 		return true;

@@ -3,7 +3,6 @@
  */
 package org.aks.hibernate.util;
 
-import org.aks.hibernate.beans.Student;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
