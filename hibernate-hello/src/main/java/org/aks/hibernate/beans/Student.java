@@ -12,13 +12,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
-
 
 
 /**
@@ -39,8 +36,11 @@ public class Student implements Serializable{
 	@Column(name="NAME")
 	private String name;
 
-	@ManyToMany(fetch=FetchType.LAZY,mappedBy="students")
-	@Cascade(value=CascadeType.ALL)
+	@ManyToMany(fetch=FetchType.LAZY,cascade=javax.persistence.CascadeType.ALL)
+	@JoinTable(	name="student_address",
+				joinColumns={@JoinColumn(name="student_id",referencedColumnName="id")},
+				inverseJoinColumns={@JoinColumn(name="address_id",referencedColumnName="id")}
+	)
 	private Collection<Address> addresses;
 	
 	public Student() {

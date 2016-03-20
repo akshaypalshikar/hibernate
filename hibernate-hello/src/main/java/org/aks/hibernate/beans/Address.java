@@ -6,6 +6,7 @@ package org.aks.hibernate.beans;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -51,7 +52,7 @@ public class Address implements Serializable {
 	@Column(name="zip_code")
 	private String zipCode;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinTable(name="student_address",joinColumns={@JoinColumn(name="address_id",referencedColumnName="id")},
 		inverseJoinColumns={@JoinColumn(name="student_id",referencedColumnName="id")}
 	)
