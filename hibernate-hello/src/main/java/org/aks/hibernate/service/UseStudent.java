@@ -27,8 +27,7 @@ public class UseStudent {
 		Student student = new Student();
 		Address address = new Address();
 		List<Address> addresses = new ArrayList<Address>();
-		//List<Student> students = new ArrayList<Student>();
-		
+	
 		addresses.add(address);
 		address.setHouseNumber("123");
 		address.setStreet("My Ave");
@@ -39,25 +38,5 @@ public class UseStudent {
 		student.setAddresses(addresses);
 		
 		studentDAO.save(student);
-		
-		
-/*		Student studentFromDB = studentDAO.get(1);
-		System.out.println("studentFromDB is : " + studentFromDB);
-		
-		Student secondStudentToSave = new Student();
-		secondStudentToSave.setName("Akshay");
-		students.clear();
-		students.add(secondStudentToSave);
-		address.setStudents(students);
-		
-		secondStudentToSave.setAddresses(addresses);
-		
-		studentDAO.save(secondStudentToSave);
-		
-		Collection<Student> studentsFromDB = studentDAO.getAllStudents();
-		System.out.println("All students are : " + studentsFromDB);
-		
-*/			
 	}
-
 }
