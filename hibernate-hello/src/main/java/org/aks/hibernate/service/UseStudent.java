@@ -28,13 +28,15 @@ public class UseStudent {
 		Address address = new Address();
 		List<Address> addresses = new ArrayList<Address>();
 	
-		addresses.add(address);
+		student.setName("Akshay");
+		
 		address.setHouseNumber("123");
 		address.setStreet("My Ave");
 		address.setCity("My City");
 		address.setState("ABC state");
 		address.setZipCode("00110");
-		student.setName("Poorva");
+		addresses.add(address);
+		
 		student.setAddresses(addresses);
 		
 		studentDAO.save(student);
